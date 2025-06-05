@@ -29,7 +29,7 @@ variable "ip_rules" {
 variable "vm_size" {
   description = "Size of the VM for the compute cluster"
   type        = string
-  default     = "Standard_DS2_v2"
+  default     = "Standard_D2ds_v5"
 }
 
 variable "vm_priority" {
@@ -77,4 +77,9 @@ variable "ai_project_name_override" {
   description = "value to override the project name"
   type        = string
   default     = null
+}
+
+variable "instances" {
+  type    = number
+  default = 1
 }
