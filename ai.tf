@@ -74,6 +74,7 @@ resource "azurerm_machine_learning_compute_instance" "compute_instance" {
   machine_learning_workspace_id = azurerm_machine_learning_workspace.ml_workspace.id
   virtual_machine_size          = var.vm_size
   authorization_type            = "personal"
+  node_public_ip_enabled        = false
 
   identity {
     type = "SystemAssigned"
