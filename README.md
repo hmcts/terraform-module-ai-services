@@ -41,8 +41,6 @@ module "todo_resource_name" {
 | [azurerm_private_endpoint.ml_private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
 | [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_role_assignment.blob_contributor_from_cognitive_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.blob_contributor_from_compute_instance](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.sa_contributor_from_compute_instance](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
 
 ## Inputs
@@ -83,6 +81,7 @@ module "todo_resource_name" {
 | <a name="output_cognitive_account_identity"></a> [cognitive\_account\_identity](#output\_cognitive\_account\_identity) | n/a |
 | <a name="output_cognitive_account_primary_access_key"></a> [cognitive\_account\_primary\_access\_key](#output\_cognitive\_account\_primary\_access\_key) | n/a |
 | <a name="output_cognitive_account_secondary_access_key"></a> [cognitive\_account\_secondary\_access\_key](#output\_cognitive\_account\_secondary\_access\_key) | n/a |
+| <a name="output_compute_instance_identity"></a> [compute\_instance\_identity](#output\_compute\_instance\_identity) | n/a |
 | <a name="output_ml_workspace_identity"></a> [ml\_workspace\_identity](#output\_ml\_workspace\_identity) | n/a |
 <!-- END_TF_DOCS -->
 
