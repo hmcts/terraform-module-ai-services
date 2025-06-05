@@ -70,7 +70,7 @@ resource "azurerm_machine_learning_workspace" "ml_workspace" {
 
 resource "azurerm_machine_learning_compute_instance" "compute_instance" {
   count                         = var.instances
-  name                          = "${var.product}-compute-${var.env}"
+  name                          = "${var.product}-compute-${var.env}-${count.index + 1}"
   machine_learning_workspace_id = azurerm_machine_learning_workspace.ml_workspace.id
   virtual_machine_size          = var.vm_size
   authorization_type            = "personal"
