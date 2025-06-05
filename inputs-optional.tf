@@ -78,3 +78,8 @@ variable "ai_project_name_override" {
   type        = string
   default     = null
 }
+
+variable "instances" {
+  type    = number
+  default = 1
+}
