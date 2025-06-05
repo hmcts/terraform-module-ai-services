@@ -29,7 +29,7 @@ variable "ip_rules" {
 variable "vm_size" {
   description = "Size of the VM for the compute cluster"
   type        = string
-  default     = "Standard_DS2_v2"
+  default     = "Standard_D2ds_v5"
 }
 
 variable "vm_priority" {
