@@ -19,5 +19,7 @@ output "cognitive_account_secondary_access_key" {
 }
 
 output "compute_instance_identity" {
-  value = azurerm_machine_learning_compute_instance.compute_instance[*].identity[0].principal_id
+  value = tomap({
+    for i in azurerm_machine_learning_compute_instance.compute_instance : i.name => i.identity[0].principal_id
+  })
 }
