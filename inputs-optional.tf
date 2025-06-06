@@ -22,7 +22,7 @@ variable "cognitive_account_sku" {
 }
 
 variable "ip_rules" {
-  description = "IP rules for the cognitive account"
+  description = "IP rules for the resources"
   default     = []
 }
 
@@ -100,12 +100,6 @@ variable "workspace_storage_account_replication_type" {
   description = "Replication type of the workspace storage account"
   type        = string
   default     = "ZRS"
-}
-
-variable "ip_rules" {
-  type        = list(string)
-  description = "(Optional) List of public IP addresses which will have access to storage account."
-  default     = []
 }
 
 variable "sa_subnets" {
