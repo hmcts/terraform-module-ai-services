@@ -22,11 +22,6 @@ variable "component" {
   type        = string
 }
 
-variable "storage_account_id" {
-  description = "ID of existing storage account"
-  type        = string
-}
-
 variable "key_vault_id" {
   description = "ID of existing key vault"
   type        = string

@@ -23,3 +23,7 @@ output "compute_instance_identity" {
     for i in azurerm_machine_learning_compute_instance.compute_instance : i.name => i.identity[0].principal_id
   })
 }
+
+output "ai_storage_account_id" {
+  value = azurerm_storage_account.workspace_storage_account.id
+}
