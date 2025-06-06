@@ -30,7 +30,7 @@ resource "azurerm_ai_foundry_project" "ai_foundry_project" {
 }
 
 resource "azurerm_cognitive_account" "cognitive_account" {
-  name                = "${var.product}-cognitive-account-${var.env}"
+  name                = var.existing_cognitive_account_name == null ? "${var.product}-cognitive-account-${var.env}" : var.existing_cognitive_account_name
   location            = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
   resource_group_name = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
   kind                = var.cognitive_account_kind

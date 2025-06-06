@@ -21,6 +21,12 @@ variable "cognitive_account_sku" {
   default     = "F0"
 }
 
+variable "existing_cognitive_account_name" {
+  description = "Name of existing cognitive account to use"
+  type        = string
+  default     = null
+}
+
 variable "ip_rules" {
   description = "IP rules for the resources"
   default     = []
