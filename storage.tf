@@ -22,16 +22,16 @@ resource "azurerm_storage_account" "workspace_storage_account" {
     }
     cors_rule {
 
-      allowed_headers    = ["*"]
-      allowed_methods    = ["DELETE","GET","HEAD","MERGE","POST","OPTIONS","PUT","PATCH"]
-      allowed_origins    = [
+      allowed_headers = ["*"]
+      allowed_methods = ["DELETE", "GET", "HEAD", "MERGE", "POST", "OPTIONS", "PUT", "PATCH"]
+      allowed_origins = [
         "https://documentintelligence.ai.azure.com",
         "https://mlworkspace.azure.ai",
         "https://ml.azure.com",
         "https://*.ml.azure.com",
         "https://ai.azure.com",
         "https://*.ai.azure.com",
-        ]
+      ]
       exposed_headers    = ["*"]
       max_age_in_seconds = 120
     }
