@@ -22,10 +22,10 @@ resource "azurerm_storage_account" "workspace_storage_account" {
     }
     cors_rule {
 
-      allowed_headers    = "*"
-      allowed_methods    = "*"
-      allowed_origins    = "https://documentintelligence.ai.azure.com"
-      exposed_headers    = "*"
+      allowed_headers    = ["*"]
+      allowed_methods    = ["*"]
+      allowed_origins    = ["https://documentintelligence.ai.azure.com"]
+      exposed_headers    = ["*"]
       max_age_in_seconds = 120
     }
   }

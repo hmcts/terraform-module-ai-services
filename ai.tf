@@ -1,10 +1,10 @@
 resource "azurerm_ai_foundry" "ai_foundry" {
-  name                         = "${var.product}-ai-foundry-${var.env}"
-  location                     = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
-  resource_group_name          = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
-  workspace_storage_account_id = azurerm_storage_account.workspace_storage_account.id
-  key_vault_id                 = var.key_vault_id
-  public_network_access        = var.public_network_access_foundry
+  name                  = "${var.product}-ai-foundry-${var.env}"
+  location              = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
+  resource_group_name   = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
+  storage_account_id    = azurerm_storage_account.workspace_storage_account.id
+  key_vault_id          = var.key_vault_id
+  public_network_access = var.public_network_access_foundry
 
   identity {
     type = "SystemAssigned"
