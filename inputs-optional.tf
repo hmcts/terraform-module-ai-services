@@ -84,3 +84,37 @@ variable "instances" {
   default     = 0
   description = "The number of compute instances to deploy"
 }
+
+variable "files_storage_account_id" {
+  description = "ID of existing storage account where files to be processed are stored"
+  type        = string
+  default     = null
+}
+
+variable "workspace_storage_account_tier" {
+  description = "Tier of the workspace storage account"
+  type        = string
+  default     = "Standard"
+}
+variable "workspace_storage_account_replication_type" {
+  description = "Replication type of the workspace storage account"
+  type        = string
+  default     = "ZRS"
+}
+
+variable "ip_rules" {
+  type        = list(string)
+  description = "(Optional) List of public IP addresses which will have access to storage account."
+  default     = []
+}
+
+variable "sa_subnets" {
+  type        = list(string)
+  description = "(Optional) List of subnet ID's which will have access to this storage account."
+  default     = []
+}
+
+variable "default_action" {
+  description = "(Optional) Network rules default action"
+  default     = "Allow"
+}
