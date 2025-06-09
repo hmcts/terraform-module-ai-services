@@ -118,3 +118,9 @@ variable "default_action" {
   description = "(Optional) Network rules default action"
   default     = "Allow"
 }
+
+variable "compute_instance_public_ip_enabled" {
+  description = "Enable public IP for compute instances"
+  type        = bool
+  default     = false
+}
