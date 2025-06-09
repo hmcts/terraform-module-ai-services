@@ -75,7 +75,7 @@ resource "azurerm_machine_learning_compute_instance" "compute_instance" {
   virtual_machine_size          = var.vm_size
   authorization_type            = "personal"
   node_public_ip_enabled        = var.compute_instance_public_ip_enabled
-  subnet_resource_id            = var.compute_instance_public_ip_enabled == false ? null : var.subnet_id
+  subnet_resource_id            = var.compute_instance_public_ip_enabled == false ? var.subnet_id : null
 
   identity {
     type = "SystemAssigned"
