@@ -22,11 +22,6 @@ variable "component" {
   type        = string
 }
 
-variable "storage_account_id" {
-  description = "ID of existing storage account"
-  type        = string
-}
-
 variable "key_vault_id" {
   description = "ID of existing key vault"
   type        = string
@@ -34,5 +29,15 @@ variable "key_vault_id" {
 
 variable "application_insights_id" {
   description = "ID of existing application insights"
+  type        = string
+}
+
+variable "cognitive_account_kind" {
+  description = "Kind of cognitive account"
+  type        = string
+}
+
+variable "subnet_id" {
+  description = "ID of existing subnet for the private endpoint"
   type        = string
 }
