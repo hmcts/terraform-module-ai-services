@@ -80,7 +80,7 @@ variable "ai_project_name_override" {
 }
 
 variable "instances" {
-  type    = number
-  default = 0
+  type        = number
+  default     = 0
   description = "The number of compute instances to deploy"
 }
