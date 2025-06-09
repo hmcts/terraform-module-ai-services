@@ -1,14 +1,12 @@
-# terraform-module-template
+# terraform-module-ai-services
 
-<!-- TODO fill in resource name in link to product documentation -->
-Terraform module for [Resource name](https://example.com).
+Terraform module to create Azure AI resources
 
 ## Example
 
-<!-- todo update module name -->
 ```hcl
-module "todo_resource_name" {
-  source = "git@github.com:hmcts/terraform-module-todo?ref=main"
+module "ai" {
+  source = "git@github.com:hmcts/terraform-module-ai-services?ref=main"
   ...
 }
 
@@ -19,13 +17,13 @@ module "todo_resource_name" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.7.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 4.24.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.7.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 4.24.0 |
 
 ## Resources
 
@@ -65,6 +63,7 @@ module "todo_resource_name" {
 | <a name="input_cognitive_account_sku"></a> [cognitive\_account\_sku](#input\_cognitive\_account\_sku) | SKU of cognitive account | `string` | `"F0"` | no |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | Common tag to be applied to resources | `map(string)` | n/a | yes |
 | <a name="input_component"></a> [component](#input\_component) | https://hmcts.github.io/glossary/#component | `string` | n/a | yes |
+| <a name="input_compute_instance_public_ip_enabled"></a> [compute\_instance\_public\_ip\_enabled](#input\_compute\_instance\_public\_ip\_enabled) | Enable public IP for compute instances | `bool` | `false` | no |
 | <a name="input_default_action"></a> [default\_action](#input\_default\_action) | (Optional) Network rules default action | `string` | `"Allow"` | no |
 | <a name="input_env"></a> [env](#input\_env) | Environment value | `string` | n/a | yes |
 | <a name="input_existing_cognitive_account_name"></a> [existing\_cognitive\_account\_name](#input\_existing\_cognitive\_account\_name) | Name of existing cognitive account to use | `string` | `null` | no |
