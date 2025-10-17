@@ -148,3 +148,8 @@ variable "create_ml_workspace" {
   type        = bool
   default     = false
 }
+
+variable "storage_account_name_override" {
+  type = string
+  default = null
+}
