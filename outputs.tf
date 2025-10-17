@@ -1,5 +1,5 @@
 output "cognitive_account_identity" {
-  value = azurerm_cognitive_account.cognitive_account.identity[0].principal_id
+  value = azurerm_cognitive_account.cognitive_account[0].identity[0].principal_id
 }
 
 output "ai_foundry_identity" {
@@ -11,11 +11,11 @@ output "ml_workspace_identity" {
 }
 
 output "cognitive_account_primary_access_key" {
-  value = azurerm_cognitive_account.cognitive_account.primary_access_key
+  value = azurerm_cognitive_account.cognitive_account[0].primary_access_key
 }
 
 output "cognitive_account_secondary_access_key" {
-  value = azurerm_cognitive_account.cognitive_account.secondary_access_key
+  value = azurerm_cognitive_account.cognitive_account[0].secondary_access_key
 }
 
 output "compute_instance_identity" {
@@ -25,5 +25,5 @@ output "compute_instance_identity" {
 }
 
 output "ai_storage_account_id" {
-  value = azurerm_storage_account.workspace_storage_account.id
+  value = azurerm_storage_account.workspace_storage_account[0].id
 }
