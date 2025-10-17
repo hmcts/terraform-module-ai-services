@@ -7,7 +7,7 @@ output "ai_foundry_identity" {
 }
 
 output "ml_workspace_identity" {
-  value = azurerm_machine_learning_workspace.ml_workspace[0].identity.principal_id
+  value = azurerm_machine_learning_workspace.ml_workspace[0].identity[0].principal_id
 }
 
 output "cognitive_account_primary_access_key" {
