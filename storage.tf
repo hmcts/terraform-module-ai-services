@@ -1,4 +1,5 @@
 resource "azurerm_storage_account" "workspace_storage_account" {
+  count                    = var.create_ml_workspace == true ? 1 : 0
   name                     = "${replace(var.product, "-", "")}${var.component}sa${var.env}"
   resource_group_name      = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
   location                 = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location

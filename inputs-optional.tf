@@ -148,4 +148,3 @@ variable "create_ml_workspace" {
   type        = bool
   default     = false
 }
-
