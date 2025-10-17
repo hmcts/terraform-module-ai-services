@@ -9,9 +9,11 @@ resource "azurerm_ai_foundry" "ai_foundry" {
   identity {
     type = "SystemAssigned"
   }
-
-  managed_network {
-    isolation_mode = "AllowInternetOutbound"
+  dynamic "managed_network" {
+    for_each = var.enable_managed_network ? [1] : []
+    content {
+      isolation_mode = var.managed_network_isolation_mode
+    }
   }
 
   tags = var.common_tags
@@ -30,6 +32,7 @@ resource "azurerm_ai_foundry_project" "ai_foundry_project" {
 }
 
 resource "azurerm_cognitive_account" "cognitive_account" {
+  count               = var.create_cognitive_account == true ? 1 : 0
   name                = var.existing_cognitive_account_name == null ? "${var.product}-cognitive-account-${var.env}" : var.existing_cognitive_account_name
   location            = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
   resource_group_name = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
@@ -49,6 +52,8 @@ resource "azurerm_cognitive_account" "cognitive_account" {
 }
 
 resource "azurerm_machine_learning_workspace" "ml_workspace" {
+  count = var.create_ml_workspace == true ? 1 : 0
+
   name                          = "${var.product}-ml-workspace-${var.env}"
   location                      = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
   resource_group_name           = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name

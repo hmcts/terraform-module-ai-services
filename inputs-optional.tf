@@ -124,3 +124,28 @@ variable "compute_instance_public_ip_enabled" {
   type        = bool
   default     = false
 }
+
+variable "enable_managed_network" {
+  description = "Enable managed network for ai resources"
+  type        = bool
+  default     = false
+}
+
+variable "managed_network_isolation_mode" {
+  description = "Set the network mode when using managed network"
+  type        = string
+  default     = "AllowInternetOutbound"
+}
+
+variable "create_cognitive_account" {
+  description = "Create cognitive account resource"
+  type        = bool
+  default     = false
+}
+
+variable "create_ml_workspace" {
+  description = "Create machine learning workspace resource"
+  type        = bool
+  default     = false
+}
+
