@@ -2,13 +2,13 @@
 resource "azurerm_role_assignment" "cog_blob_contributor_to_ai_storage_account" {
   scope                = azurerm_storage_account.workspace_storage_account[0].id
   role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = azurerm_cognitive_account.cognitive_account.identity[0].principal_id
+  principal_id         = azurerm_cognitive_account.cognitive_account[0].identity[0].principal_id
 }
 
 resource "azurerm_role_assignment" "cog_contributor_to_ai_storage_account" {
   scope                = azurerm_storage_account.workspace_storage_account[0].id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_cognitive_account.cognitive_account.identity[0].principal_id
+  principal_id         = azurerm_cognitive_account.cognitive_account[0].identity[0].principal_id
 }
 
 # cognitive account access to file storage account
@@ -17,14 +17,14 @@ resource "azurerm_role_assignment" "cog_blob_contributor_to_file_storage_account
   count                = var.files_storage_account_id == null ? 0 : 1
   scope                = var.files_storage_account_id
   role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = azurerm_cognitive_account.cognitive_account.identity[0].principal_id
+  principal_id         = azurerm_cognitive_account.cognitive_account[0].identity[0].principal_id
 }
 
 resource "azurerm_role_assignment" "cog_contributor_to_file_storage_account" {
   count                = var.files_storage_account_id == null ? 0 : 1
   scope                = var.files_storage_account_id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_cognitive_account.cognitive_account.identity[0].principal_id
+  principal_id         = azurerm_cognitive_account.cognitive_account[0].identity[0].principal_id
 }
 
 # ml workspace access to ai storage account
