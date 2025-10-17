@@ -32,13 +32,13 @@ resource "azurerm_role_assignment" "cog_contributor_to_file_storage_account" {
 resource "azurerm_role_assignment" "ml_blob_contributor_to_ai_storage_account" {
   scope                = azurerm_storage_account.workspace_storage_account[0].id
   role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = azurerm_machine_learning_workspace.ml_workspace.identity[0].principal_id
+  principal_id         = azurerm_machine_learning_workspace.ml_workspace.identity[count.index].principal_id
 }
 
 resource "azurerm_role_assignment" "ml_contributor_from_to_ai_storage_account" {
   scope                = azurerm_storage_account.workspace_storage_account[0].id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_machine_learning_workspace.ml_workspace.identity[0].principal_id
+  principal_id         = azurerm_machine_learning_workspace.ml_workspace.identity[count.index].principal_id
 }
 
 # ml workspace access to file storage account
@@ -48,7 +48,7 @@ resource "azurerm_role_assignment" "ml_blob_contributor_to_file_storage_account"
 
   scope                = var.files_storage_account_id
   role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = azurerm_machine_learning_workspace.ml_workspace.identity[0].principal_id
+  principal_id         = azurerm_machine_learning_workspace.ml_workspace.identity[count.index].principal_id
 }
 
 resource "azurerm_role_assignment" "ml_contributor_to_file_storage_account" {
@@ -56,7 +56,7 @@ resource "azurerm_role_assignment" "ml_contributor_to_file_storage_account" {
 
   scope                = var.files_storage_account_id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_machine_learning_workspace.ml_workspace.identity[0].principal_id
+  principal_id         = azurerm_machine_learning_workspace.ml_workspace.identity[count.index].principal_id
 }
 
 # compute cluster access to ai storage account
