@@ -30,14 +30,17 @@ variable "key_vault_id" {
 variable "application_insights_id" {
   description = "ID of existing application insights"
   type        = string
+  default     = null
 }
 
 variable "cognitive_account_kind" {
   description = "Kind of cognitive account"
   type        = string
+  default     = null
 }
 
 variable "subnet_id" {
   description = "ID of existing subnet for the private endpoint"
   type        = string
+  default     = null
 }
