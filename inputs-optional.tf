@@ -148,9 +148,3 @@ variable "create_ml_workspace" {
   type        = bool
   default     = false
 }
-
-variable "application_insights_id" {
-  description = "ID of existing application insights"
-  type        = string
-  default     = null
-}
