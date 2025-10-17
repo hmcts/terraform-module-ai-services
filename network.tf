@@ -34,7 +34,7 @@ resource "azurerm_private_endpoint" "cognitive_private_endpoint" {
 
   private_service_connection {
     name                           = "cognitive-account-psc"
-    private_connection_resource_id = azurerm_cognitive_account.cognitive_account.id
+    private_connection_resource_id = azurerm_cognitive_account.cognitive_account[0].id
     subresource_names              = ["account"]
     is_manual_connection           = false
   }
@@ -61,7 +61,7 @@ resource "azurerm_private_endpoint" "ml_private_endpoint" {
   private_service_connection {
 
     name                           = "ml-workspace-psc"
-    private_connection_resource_id = azurerm_machine_learning_workspace.ml_workspace.id
+    private_connection_resource_id = azurerm_machine_learning_workspace.ml_workspace[0].id
     subresource_names              = ["amlworkspace"]
     is_manual_connection           = false
   }
