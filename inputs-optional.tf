@@ -164,5 +164,12 @@ variable "cognitive_deployment" {
     sku_name      = optional(string)
     sku_capacity  = optional(number)
   })
-  default = {}
+  default = {
+    name          = "my-openai-deployment"
+    model_name    = "gpt-5-mini"
+    model_version = "2025-08-07"
+    model_format  = "OpenAI"
+    sku_name      = "GlobalStandard"
+    sku_capacity  = 1
+  }
 }
