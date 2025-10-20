@@ -57,13 +57,14 @@ resource "azurerm_cognitive_deployment" "cognitive_deployment" {
   cognitive_account_id = azurerm_cognitive_account.cognitive_account[0].id
 
   model {
-    format  = try(each.value.model_format, "OpenAI")
-    name    = try(each.value.model_name, "gpt-5-mini")
-    version = try(each.value.model_version, "2025-08-07")
+    format  = each.value.model_format == null ? "OpenAI" : each.value.model_format
+    name    = each.value.model_name == null ? "gpt-5-mini" : each.value.model_name
+    version = each.value.model_version == null ? "2025-08-07" : each.value.model_version
   }
+
   sku {
-    name     = try(each.value.sku_name, "F0")
-    capacity = try(each.value.sku_capacity, 1)
+    name     = each.value.sku_name == null ? "GlobalStandard" : each.value.sku_name
+    capacity = each.value.sku_capacity == null ? 1 : each.value.sku_name
   }
 }
 
