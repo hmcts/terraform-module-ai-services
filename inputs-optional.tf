@@ -150,6 +150,19 @@ variable "create_ml_workspace" {
 }
 
 variable "storage_account_name_override" {
-  type = string
+  type    = string
   default = null
+}
+
+variable "cognitive_deployment" {
+  description = "Configuration for cognitive deployment. Should be a map containing deployment-specific settings."
+  type = object({
+    name          = optional(string)
+    model_name    = optional(string)
+    model_version = optional(string)
+    model_format  = optional(string)
+    sku_name      = optional(string)
+    sku_capacity  = optional(number)
+  })
+  default = {}
 }
