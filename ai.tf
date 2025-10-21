@@ -64,7 +64,7 @@ resource "azurerm_cognitive_deployment" "cognitive_deployment" {
 
   sku {
     name     = each.value.sku_name == null ? "GlobalStandard" : each.value.sku_name
-    capacity = each.value.sku_capacity == null ? 1 : each.value.sku_name
+    capacity = each.value.sku_capacity == null ? 1 : each.value.sku_capacity
   }
 }
 
