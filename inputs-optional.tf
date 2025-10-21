@@ -4,8 +4,8 @@ variable "existing_resource_group_name" {
   default     = null
 }
 
-variable "existing_storage_account_name" {
-  description = "Name of existing storage account to use"
+variable "existing_storage_account_id" {
+  description = "ID of existing storage account to use"
   type        = string
   default     = null
 }
