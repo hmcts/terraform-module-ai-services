@@ -29,5 +29,5 @@ output "compute_instance_identity" {
 }
 
 output "ai_storage_account_id" {
-  value = azurerm_storage_account.workspace_storage_account[0].id == null ? var.existing_storage_account_id : azurerm_storage_account.workspace_storage_account[0].id
+  value = length(azurerm_storage_account.workspace_storage_account) == 0 ? var.existing_storage_account_id : azurerm_storage_account.workspace_storage_account[0].id
 }
