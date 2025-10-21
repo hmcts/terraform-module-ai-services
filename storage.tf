@@ -1,4 +1,5 @@
 resource "azurerm_storage_account" "workspace_storage_account" {
+  count                    = var.existing_storage_account_name == null ? 1 : 0
   name                     = var.storage_account_name_override == null ? "${replace(var.product, "-", "")}${var.component}sa${var.env}" : var.storage_account_name_override
   resource_group_name      = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
   location                 = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
