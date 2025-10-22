@@ -1,4 +1,5 @@
 resource "azurerm_private_endpoint" "foundry_private_endpoint" {
+  count               = var.enable_managed_network == true ? 1 : 0
   name                = "${var.product}-ai-foundry-pe-${var.env}"
   location            = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
   resource_group_name = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
@@ -24,6 +25,8 @@ resource "azurerm_private_endpoint" "foundry_private_endpoint" {
 }
 
 resource "azurerm_private_endpoint" "cognitive_private_endpoint" {
+  count = var.enable_managed_network == true ? 1 : 0
+
   name                = "${var.product}-cognitive-account-pe-${var.env}"
   location            = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
   resource_group_name = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
@@ -31,7 +34,7 @@ resource "azurerm_private_endpoint" "cognitive_private_endpoint" {
 
   private_service_connection {
     name                           = "cognitive-account-psc"
-    private_connection_resource_id = azurerm_cognitive_account.cognitive_account.id
+    private_connection_resource_id = azurerm_cognitive_account.cognitive_account[0].id
     subresource_names              = ["account"]
     is_manual_connection           = false
   }
@@ -48,14 +51,17 @@ resource "azurerm_private_endpoint" "cognitive_private_endpoint" {
 }
 
 resource "azurerm_private_endpoint" "ml_private_endpoint" {
+  count = var.enable_managed_network == true ? 1 : 0
+
   name                = "${var.product}-ml-workspace-pe-${var.env}"
   location            = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
   resource_group_name = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
   subnet_id           = var.subnet_id
 
   private_service_connection {
+
     name                           = "ml-workspace-psc"
-    private_connection_resource_id = azurerm_machine_learning_workspace.ml_workspace.id
+    private_connection_resource_id = azurerm_machine_learning_workspace.ml_workspace[0].id
     subresource_names              = ["amlworkspace"]
     is_manual_connection           = false
   }

@@ -4,6 +4,12 @@ variable "existing_resource_group_name" {
   default     = null
 }
 
+variable "existing_storage_account_id" {
+  description = "ID of existing storage account to use"
+  type        = string
+  default     = null
+}
+
 variable "location" {
   description = "Target Azure location to deploy the resource"
   type        = string
@@ -123,4 +129,45 @@ variable "compute_instance_public_ip_enabled" {
   description = "Enable public IP for compute instances"
   type        = bool
   default     = false
+}
+
+variable "enable_managed_network" {
+  description = "Enable managed network for ai resources"
+  type        = bool
+  default     = false
+}
+
+variable "managed_network_isolation_mode" {
+  description = "Set the network mode when using managed network"
+  type        = string
+  default     = "AllowInternetOutbound"
+}
+
+variable "create_cognitive_account" {
+  description = "Create cognitive account resource"
+  type        = bool
+  default     = false
+}
+
+variable "create_ml_workspace" {
+  description = "Create machine learning workspace resource"
+  type        = bool
+  default     = false
+}
+
+variable "storage_account_name_override" {
+  type    = string
+  default = null
+}
+
+variable "cognitive_deployments" {
+  description = "Map of cognitive deployments keyed by deployment name."
+  type = map(object({
+    model_name    = optional(string)
+    model_version = optional(string)
+    model_format  = optional(string)
+    sku_name      = optional(string)
+    sku_capacity  = optional(number)
+  }))
+  default = {}
 }
