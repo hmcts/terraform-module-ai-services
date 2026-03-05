@@ -25,7 +25,7 @@ resource "azurerm_private_endpoint" "foundry_private_endpoint" {
 }
 
 resource "azurerm_private_endpoint" "cognitive_private_endpoint" {
-  count = var.enable_managed_network == true ? 1 : 0
+  count = var.enable_managed_network == true && var.create_cognitive_account == true ? 1 : 0
 
   name                = "${var.product}-cognitive-account-pe-${var.env}"
   location            = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
@@ -51,7 +51,7 @@ resource "azurerm_private_endpoint" "cognitive_private_endpoint" {
 }
 
 resource "azurerm_private_endpoint" "ml_private_endpoint" {
-  count = var.enable_managed_network == true ? 1 : 0
+  count = var.enable_managed_network == true && var.create_ml_workspace == true ? 1 : 0
 
   name                = "${var.product}-ml-workspace-pe-${var.env}"
   location            = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
