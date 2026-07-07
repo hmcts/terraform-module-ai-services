@@ -13,10 +13,10 @@ resource "azurerm_private_endpoint" "foundry_private_endpoint" {
   }
 
   dynamic "private_dns_zone_group" {
-    for_each = length(var.foundry_private_dns_zone_ids) == 0 ? [] : [1]
+    for_each = length(local.foundry_private_dns_zone_ids) == 0 ? [] : [1]
     content {
       name                 = "endpoint-dnszonegroup"
-      private_dns_zone_ids = var.foundry_private_dns_zone_ids
+      private_dns_zone_ids = local.foundry_private_dns_zone_ids
     }
   }
 
@@ -41,10 +41,10 @@ resource "azurerm_private_endpoint" "cognitive_private_endpoint" {
 
   # Omitted when the zone ID list is empty (DNS managed externally).
   dynamic "private_dns_zone_group" {
-    for_each = length(var.cognitive_private_dns_zone_ids) == 0 ? [] : [1]
+    for_each = length(local.cognitive_private_dns_zone_ids) == 0 ? [] : [1]
     content {
       name                 = "endpoint-dnszonegroup"
-      private_dns_zone_ids = var.cognitive_private_dns_zone_ids
+      private_dns_zone_ids = local.cognitive_private_dns_zone_ids
     }
   }
 
@@ -70,10 +70,10 @@ resource "azurerm_private_endpoint" "ml_private_endpoint" {
 
   # Omitted when the zone ID list is empty (DNS managed externally).
   dynamic "private_dns_zone_group" {
-    for_each = length(var.ml_private_dns_zone_ids) == 0 ? [] : [1]
+    for_each = length(local.ml_private_dns_zone_ids) == 0 ? [] : [1]
     content {
       name                 = "endpoint-dnszonegroup"
-      private_dns_zone_ids = var.ml_private_dns_zone_ids
+      private_dns_zone_ids = local.ml_private_dns_zone_ids
     }
   }
 

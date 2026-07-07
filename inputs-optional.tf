@@ -192,27 +192,25 @@ variable "cognitive_deployments" {
 }
 
 variable "foundry_private_dns_zone_ids" {
-  description = "Private DNS zone IDs for the AI Foundry private endpoint. Empty list omits the dns zone group."
+  description = "Private DNS zone IDs for the AI Foundry private endpoint. null resolves the central zones via the azurerm.private_dns provider; empty list omits the dns zone group."
   type        = list(string)
-  default = [
-    "/subscriptions/1baf5470-1c3e-40d3-a6f7-74bfbce4b348/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/privatelink.api.azureml.ms",
-    "/subscriptions/1baf5470-1c3e-40d3-a6f7-74bfbce4b348/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/privatelink.notebooks.azure.net"
-  ]
+  default     = null
 }
 
 variable "cognitive_private_dns_zone_ids" {
-  description = "Private DNS zone IDs for the cognitive account private endpoint. Empty list omits the dns zone group."
+  description = "Private DNS zone IDs for the cognitive account private endpoint. null resolves the central zones via the azurerm.private_dns provider; empty list omits the dns zone group."
   type        = list(string)
-  default = [
-    "/subscriptions/1baf5470-1c3e-40d3-a6f7-74bfbce4b348/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/privatelink.cognitiveservices.azure.com"
-  ]
+  default     = null
 }
 
 variable "ml_private_dns_zone_ids" {
-  description = "Private DNS zone IDs for the ML workspace private endpoint. Empty list omits the dns zone group."
+  description = "Private DNS zone IDs for the ML workspace private endpoint. null resolves the central zones via the azurerm.private_dns provider; empty list omits the dns zone group."
   type        = list(string)
-  default = [
-    "/subscriptions/1baf5470-1c3e-40d3-a6f7-74bfbce4b348/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/privatelink.api.azureml.ms",
-    "/subscriptions/1baf5470-1c3e-40d3-a6f7-74bfbce4b348/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/privatelink.notebooks.azure.net"
-  ]
+  default     = null
+}
+
+variable "private_dns_zone_resource_group_name" {
+  description = "Resource group holding the central privatelink DNS zones, used by the default zone lookups."
+  type        = string
+  default     = "core-infra-intsvc-rg"
 }
