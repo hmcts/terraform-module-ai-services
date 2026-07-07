@@ -1,4 +1,5 @@
 resource "azurerm_ai_foundry" "ai_foundry" {
+  count                 = var.create_ai_foundry == true ? 1 : 0
   name                  = "${var.product}-ai-foundry-${var.env}"
   location              = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
   resource_group_name   = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
@@ -19,16 +20,27 @@ resource "azurerm_ai_foundry" "ai_foundry" {
   tags = var.common_tags
 }
 
+moved {
+  from = azurerm_ai_foundry.ai_foundry
+  to   = azurerm_ai_foundry.ai_foundry[0]
+}
+
 resource "azurerm_ai_foundry_project" "ai_foundry_project" {
+  count              = var.create_ai_foundry == true ? 1 : 0
   name               = var.ai_project_name_override == null ? "${var.product}-project-${var.env}" : var.ai_project_name_override
-  location           = azurerm_ai_foundry.ai_foundry.location
-  ai_services_hub_id = azurerm_ai_foundry.ai_foundry.id
+  location           = azurerm_ai_foundry.ai_foundry[0].location
+  ai_services_hub_id = azurerm_ai_foundry.ai_foundry[0].id
   identity {
     type = "SystemAssigned"
   }
 
   tags = var.common_tags
 
+}
+
+moved {
+  from = azurerm_ai_foundry_project.ai_foundry_project
+  to   = azurerm_ai_foundry_project.ai_foundry_project[0]
 }
 
 resource "azurerm_cognitive_account" "cognitive_account" {
@@ -43,6 +55,13 @@ resource "azurerm_cognitive_account" "cognitive_account" {
 
   sku_name = var.cognitive_account_sku
 
+  dynamic "network_acls" {
+    for_each = var.cognitive_account_network_acls_default_action == null ? [] : [1]
+    content {
+      default_action = var.cognitive_account_network_acls_default_action
+    }
+  }
+
   identity {
     type = "SystemAssigned"
   }
@@ -55,6 +74,8 @@ resource "azurerm_cognitive_deployment" "cognitive_deployment" {
   for_each             = var.cognitive_deployments
   name                 = each.key
   cognitive_account_id = azurerm_cognitive_account.cognitive_account[0].id
+
+  version_upgrade_option = each.value.version_upgrade_option
 
   model {
     format  = each.value.model_format == null ? "OpenAI" : each.value.model_format

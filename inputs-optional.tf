@@ -143,10 +143,28 @@ variable "managed_network_isolation_mode" {
   default     = "AllowInternetOutbound"
 }
 
+variable "create_ai_foundry" {
+  description = "Create the AI Foundry hub and project resources"
+  type        = bool
+  default     = true
+}
+
+variable "create_storage_account" {
+  description = "Create the workspace storage account. Only needed by the AI Foundry hub / ML workspace; set false alongside create_ai_foundry = false when neither is used."
+  type        = bool
+  default     = true
+}
+
 variable "create_cognitive_account" {
   description = "Create cognitive account resource"
   type        = bool
   default     = false
+}
+
+variable "cognitive_account_network_acls_default_action" {
+  description = "Default action for the cognitive account network ACLs (e.g. Deny). null omits the network_acls block entirely."
+  type        = string
+  default     = null
 }
 
 variable "create_ml_workspace" {
@@ -163,11 +181,36 @@ variable "storage_account_name_override" {
 variable "cognitive_deployments" {
   description = "Map of cognitive deployments keyed by deployment name."
   type = map(object({
-    model_name    = optional(string)
-    model_version = optional(string)
-    model_format  = optional(string)
-    sku_name      = optional(string)
-    sku_capacity  = optional(number)
+    model_name             = optional(string)
+    model_version          = optional(string)
+    model_format           = optional(string)
+    sku_name               = optional(string)
+    sku_capacity           = optional(number)
+    version_upgrade_option = optional(string)
   }))
   default = {}
+}
+
+variable "foundry_private_dns_zone_ids" {
+  description = "Private DNS zone IDs for the AI Foundry private endpoint. null resolves the central zones via the azurerm.private_dns provider; empty list omits the dns zone group."
+  type        = list(string)
+  default     = null
+}
+
+variable "cognitive_private_dns_zone_ids" {
+  description = "Private DNS zone IDs for the cognitive account private endpoint. null resolves the central zones via the azurerm.private_dns provider; empty list omits the dns zone group."
+  type        = list(string)
+  default     = null
+}
+
+variable "ml_private_dns_zone_ids" {
+  description = "Private DNS zone IDs for the ML workspace private endpoint. null resolves the central zones via the azurerm.private_dns provider; empty list omits the dns zone group."
+  type        = list(string)
+  default     = null
+}
+
+variable "private_dns_zone_resource_group_name" {
+  description = "Resource group holding the central privatelink DNS zones, used by the default zone lookups."
+  type        = string
+  default     = "core-infra-intsvc-rg"
 }

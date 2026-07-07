@@ -3,7 +3,7 @@ output "cognitive_account_identity" {
 }
 
 output "ai_foundry_identity" {
-  value = azurerm_ai_foundry.ai_foundry.identity[0].principal_id
+  value = one(azurerm_ai_foundry.ai_foundry[*].identity[0].principal_id)
 }
 
 output "ml_workspace_identity" {
@@ -20,6 +20,10 @@ output "cognitive_account_secondary_access_key" {
 
 output "cognitive_account_endpoint" {
   value = [for account in azurerm_cognitive_account.cognitive_account : account.endpoint]
+}
+
+output "cognitive_private_endpoint_ip" {
+  value = one(azurerm_private_endpoint.cognitive_private_endpoint[*].private_service_connection[0].private_ip_address)
 }
 
 output "compute_instance_identity" {

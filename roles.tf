@@ -1,13 +1,15 @@
 # cognitive account access to ai storage account
+# Also gated on the ai storage account existing (created here or supplied),
+# so the cognitive account can be used standalone without any storage.
 resource "azurerm_role_assignment" "cog_blob_contributor_to_ai_storage_account" {
-  count                = var.create_cognitive_account == true ? 1 : 0
+  count                = var.create_cognitive_account && (var.create_storage_account || var.existing_storage_account_id != null) ? 1 : 0
   scope                = length(azurerm_storage_account.workspace_storage_account) == 0 ? var.existing_storage_account_id : azurerm_storage_account.workspace_storage_account[0].id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = azurerm_cognitive_account.cognitive_account[0].identity[0].principal_id
 }
 
 resource "azurerm_role_assignment" "cog_contributor_to_ai_storage_account" {
-  count                = var.create_cognitive_account == true ? 1 : 0
+  count                = var.create_cognitive_account && (var.create_storage_account || var.existing_storage_account_id != null) ? 1 : 0
   scope                = length(azurerm_storage_account.workspace_storage_account) == 0 ? var.existing_storage_account_id : azurerm_storage_account.workspace_storage_account[0].id
   role_definition_name = "Contributor"
   principal_id         = azurerm_cognitive_account.cognitive_account[0].identity[0].principal_id
@@ -32,14 +34,14 @@ resource "azurerm_role_assignment" "cog_contributor_to_file_storage_account" {
 # ml workspace access to ai storage account
 
 resource "azurerm_role_assignment" "ml_blob_contributor_to_ai_storage_account" {
-  count                = var.create_ml_workspace == true ? 1 : 0
+  count                = var.create_ml_workspace && (var.create_storage_account || var.existing_storage_account_id != null) ? 1 : 0
   scope                = length(azurerm_storage_account.workspace_storage_account) == 0 ? var.existing_storage_account_id : azurerm_storage_account.workspace_storage_account[0].id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = azurerm_machine_learning_workspace.ml_workspace[0].identity[0].principal_id
 }
 
 resource "azurerm_role_assignment" "ml_contributor_from_to_ai_storage_account" {
-  count                = var.create_ml_workspace == true ? 1 : 0
+  count                = var.create_ml_workspace && (var.create_storage_account || var.existing_storage_account_id != null) ? 1 : 0
   scope                = length(azurerm_storage_account.workspace_storage_account) == 0 ? var.existing_storage_account_id : azurerm_storage_account.workspace_storage_account[0].id
   role_definition_name = "Contributor"
   principal_id         = azurerm_machine_learning_workspace.ml_workspace[0].identity[0].principal_id

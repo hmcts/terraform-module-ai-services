@@ -23,8 +23,9 @@ variable "component" {
 }
 
 variable "key_vault_id" {
-  description = "ID of existing key vault"
+  description = "ID of existing key vault. Required when create_ai_foundry or create_ml_workspace is true."
   type        = string
+  default     = null
 }
 
 variable "application_insights_id" {
