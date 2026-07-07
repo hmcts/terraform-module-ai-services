@@ -167,6 +167,18 @@ variable "cognitive_account_network_acls_default_action" {
   default     = null
 }
 
+variable "cognitive_account_local_auth_enabled" {
+  description = "Whether API-key (local) authentication is enabled on the cognitive account. Set false to force Entra ID auth only."
+  type        = bool
+  default     = true
+}
+
+variable "cognitive_account_outbound_network_access_restricted" {
+  description = "Whether the cognitive account's own outbound network access is restricted. Defaults to false (provider default)."
+  type        = bool
+  default     = false
+}
+
 variable "create_ml_workspace" {
   description = "Create machine learning workspace resource"
   type        = bool
