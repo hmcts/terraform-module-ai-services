@@ -143,10 +143,28 @@ variable "managed_network_isolation_mode" {
   default     = "AllowInternetOutbound"
 }
 
+variable "create_ai_foundry" {
+  description = "Create the AI Foundry hub and project resources"
+  type        = bool
+  default     = true
+}
+
+variable "create_storage_account" {
+  description = "Create the workspace storage account. Only needed by the AI Foundry hub / ML workspace; set false alongside create_ai_foundry = false when neither is used."
+  type        = bool
+  default     = true
+}
+
 variable "create_cognitive_account" {
   description = "Create cognitive account resource"
   type        = bool
   default     = false
+}
+
+variable "cognitive_account_network_acls_default_action" {
+  description = "Default action for the cognitive account network ACLs (e.g. Deny). null omits the network_acls block entirely."
+  type        = string
+  default     = null
 }
 
 variable "create_ml_workspace" {
@@ -163,11 +181,38 @@ variable "storage_account_name_override" {
 variable "cognitive_deployments" {
   description = "Map of cognitive deployments keyed by deployment name."
   type = map(object({
-    model_name    = optional(string)
-    model_version = optional(string)
-    model_format  = optional(string)
-    sku_name      = optional(string)
-    sku_capacity  = optional(number)
+    model_name             = optional(string)
+    model_version          = optional(string)
+    model_format           = optional(string)
+    sku_name               = optional(string)
+    sku_capacity           = optional(number)
+    version_upgrade_option = optional(string)
   }))
   default = {}
+}
+
+variable "foundry_private_dns_zone_ids" {
+  description = "Private DNS zone IDs for the AI Foundry private endpoint. Empty list omits the dns zone group."
+  type        = list(string)
+  default = [
+    "/subscriptions/1baf5470-1c3e-40d3-a6f7-74bfbce4b348/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/privatelink.api.azureml.ms",
+    "/subscriptions/1baf5470-1c3e-40d3-a6f7-74bfbce4b348/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/privatelink.notebooks.azure.net"
+  ]
+}
+
+variable "cognitive_private_dns_zone_ids" {
+  description = "Private DNS zone IDs for the cognitive account private endpoint. Empty list omits the dns zone group."
+  type        = list(string)
+  default = [
+    "/subscriptions/1baf5470-1c3e-40d3-a6f7-74bfbce4b348/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/privatelink.cognitiveservices.azure.com"
+  ]
+}
+
+variable "ml_private_dns_zone_ids" {
+  description = "Private DNS zone IDs for the ML workspace private endpoint. Empty list omits the dns zone group."
+  type        = list(string)
+  default = [
+    "/subscriptions/1baf5470-1c3e-40d3-a6f7-74bfbce4b348/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/privatelink.api.azureml.ms",
+    "/subscriptions/1baf5470-1c3e-40d3-a6f7-74bfbce4b348/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/privatelink.notebooks.azure.net"
+  ]
 }
