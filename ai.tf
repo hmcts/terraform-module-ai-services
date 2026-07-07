@@ -52,6 +52,9 @@ resource "azurerm_cognitive_account" "cognitive_account" {
 
   public_network_access_enabled = var.public_network_access_cognitive
   custom_subdomain_name         = var.existing_cognitive_account_name == null ? "${var.product}-cognitive-account-${var.env}" : var.existing_cognitive_account_name
+  local_auth_enabled            = var.cognitive_account_local_auth_enabled
+
+  outbound_network_access_restricted = var.cognitive_account_outbound_network_access_restricted
 
   sku_name = var.cognitive_account_sku
 
