@@ -128,6 +128,7 @@ module "ai" {
 | <a name="output_cognitive_private_endpoint_ip"></a> [cognitive\_private\_endpoint\_ip](#output\_cognitive\_private\_endpoint\_ip) | n/a |
 | <a name="output_compute_instance_identity"></a> [compute\_instance\_identity](#output\_compute\_instance\_identity) | n/a |
 | <a name="output_content_safety_account_endpoint"></a> [content\_safety\_account\_endpoint](#output\_content\_safety\_account\_endpoint) | n/a |
+| <a name="output_content_safety_account_id"></a> [content\_safety\_account\_id](#output\_content\_safety\_account\_id) | n/a |
 | <a name="output_content_safety_account_identity"></a> [content\_safety\_account\_identity](#output\_content\_safety\_account\_identity) | n/a |
 | <a name="output_content_safety_private_endpoint_ip"></a> [content\_safety\_private\_endpoint\_ip](#output\_content\_safety\_private\_endpoint\_ip) | n/a |
 | <a name="output_ml_workspace_identity"></a> [ml\_workspace\_identity](#output\_ml\_workspace\_identity) | n/a |
