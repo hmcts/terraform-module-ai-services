@@ -23,8 +23,8 @@ module "ai" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 4.0 |
-| <a name="provider_azurerm.private_dns"></a> [azurerm.private\_dns](#provider\_azurerm.private\_dns) | ~> 4.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.80.0 |
+| <a name="provider_azurerm.private_dns"></a> [azurerm.private\_dns](#provider\_azurerm.private\_dns) | 4.80.0 |
 
 ## Resources
 
