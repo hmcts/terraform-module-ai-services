@@ -22,8 +22,28 @@ output "cognitive_account_endpoint" {
   value = [for account in azurerm_cognitive_account.cognitive_account : account.endpoint]
 }
 
+output "cognitive_account_id" {
+  value = length(azurerm_cognitive_account.cognitive_account) == 0 ? null : azurerm_cognitive_account.cognitive_account[0].id
+}
+
 output "cognitive_private_endpoint_ip" {
   value = one(azurerm_private_endpoint.cognitive_private_endpoint[*].private_service_connection[0].private_ip_address)
+}
+
+output "content_safety_account_identity" {
+  value = [for account in azurerm_cognitive_account.content_safety_account : account.identity[0].principal_id]
+}
+
+output "content_safety_account_endpoint" {
+  value = [for account in azurerm_cognitive_account.content_safety_account : account.endpoint]
+}
+
+output "content_safety_account_id" {
+  value = length(azurerm_cognitive_account.content_safety_account) == 0 ? null : azurerm_cognitive_account.content_safety_account[0].id
+}
+
+output "content_safety_private_endpoint_ip" {
+  value = one(azurerm_private_endpoint.content_safety_private_endpoint[*].private_service_connection[0].private_ip_address)
 }
 
 output "compute_instance_identity" {
