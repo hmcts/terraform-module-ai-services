@@ -26,6 +26,18 @@ output "cognitive_private_endpoint_ip" {
   value = one(azurerm_private_endpoint.cognitive_private_endpoint[*].private_service_connection[0].private_ip_address)
 }
 
+output "content_safety_account_identity" {
+  value = [for account in azurerm_cognitive_account.content_safety_account : account.identity[0].principal_id]
+}
+
+output "content_safety_account_endpoint" {
+  value = [for account in azurerm_cognitive_account.content_safety_account : account.endpoint]
+}
+
+output "content_safety_private_endpoint_ip" {
+  value = one(azurerm_private_endpoint.content_safety_private_endpoint[*].private_service_connection[0].private_ip_address)
+}
+
 output "compute_instance_identity" {
   value = tomap({
     for i in azurerm_machine_learning_compute_instance.compute_instance : i.name => i.identity[0].principal_id

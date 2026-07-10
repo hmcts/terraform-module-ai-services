@@ -73,6 +73,35 @@ resource "azurerm_cognitive_account" "cognitive_account" {
 
 }
 
+resource "azurerm_cognitive_account" "content_safety_account" {
+  count               = var.create_content_safety_account == true ? 1 : 0
+  name                = var.existing_content_safety_account_name == null ? "${var.product}-content-safety-account-${var.env}" : var.existing_content_safety_account_name
+  location            = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
+  resource_group_name = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
+  kind                = "ContentSafety"
+
+  public_network_access_enabled = var.public_network_access_cognitive
+  custom_subdomain_name         = var.existing_content_safety_account_name == null ? "${var.product}-content-safety-account-${var.env}" : var.existing_content_safety_account_name
+  local_auth_enabled            = var.cognitive_account_local_auth_enabled
+
+  outbound_network_access_restricted = var.cognitive_account_outbound_network_access_restricted
+
+  sku_name = var.content_safety_account_sku
+
+  dynamic "network_acls" {
+    for_each = var.cognitive_account_network_acls_default_action == null ? [] : [1]
+    content {
+      default_action = var.cognitive_account_network_acls_default_action
+    }
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  tags = var.common_tags
+}
+
 resource "azurerm_cognitive_deployment" "cognitive_deployment" {
   for_each             = var.cognitive_deployments
   name                 = each.key

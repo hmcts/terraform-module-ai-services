@@ -33,6 +33,12 @@ variable "existing_cognitive_account_name" {
   default     = null
 }
 
+variable "existing_content_safety_account_name" {
+  description = "Name of existing content safety account to use"
+  type        = string
+  default     = null
+}
+
 variable "ip_rules" {
   description = "IP rules for the resources"
   default     = []
@@ -159,6 +165,18 @@ variable "create_cognitive_account" {
   description = "Create cognitive account resource"
   type        = bool
   default     = false
+}
+
+variable "create_content_safety_account" {
+  description = "Create content safety account resource"
+  type        = bool
+  default     = false
+}
+
+variable "content_safety_account_sku" {
+  description = "SKU of content safety account"
+  type        = string
+  default     = "F0"
 }
 
 variable "cognitive_account_network_acls_default_action" {
