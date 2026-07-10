@@ -122,6 +122,7 @@ module "ai" {
 | <a name="output_ai_foundry_identity"></a> [ai\_foundry\_identity](#output\_ai\_foundry\_identity) | n/a |
 | <a name="output_ai_storage_account_id"></a> [ai\_storage\_account\_id](#output\_ai\_storage\_account\_id) | n/a |
 | <a name="output_cognitive_account_endpoint"></a> [cognitive\_account\_endpoint](#output\_cognitive\_account\_endpoint) | n/a |
+| <a name="output_cognitive_account_id"></a> [cognitive\_account\_id](#output\_cognitive\_account\_id) | n/a |
 | <a name="output_cognitive_account_identity"></a> [cognitive\_account\_identity](#output\_cognitive\_account\_identity) | n/a |
 | <a name="output_cognitive_account_primary_access_key"></a> [cognitive\_account\_primary\_access\_key](#output\_cognitive\_account\_primary\_access\_key) | n/a |
 | <a name="output_cognitive_account_secondary_access_key"></a> [cognitive\_account\_secondary\_access\_key](#output\_cognitive\_account\_secondary\_access\_key) | n/a |

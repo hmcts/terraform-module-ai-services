@@ -22,6 +22,10 @@ output "cognitive_account_endpoint" {
   value = [for account in azurerm_cognitive_account.cognitive_account : account.endpoint]
 }
 
+output "cognitive_account_id" {
+  value = length(azurerm_cognitive_account.cognitive_account) == 0 ? null : azurerm_cognitive_account.cognitive_account[0].id
+}
+
 output "cognitive_private_endpoint_ip" {
   value = one(azurerm_private_endpoint.cognitive_private_endpoint[*].private_service_connection[0].private_ip_address)
 }
