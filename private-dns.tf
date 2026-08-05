@@ -1,6 +1,6 @@
 locals {
   lookup_foundry_zones   = var.enable_managed_network && var.create_ai_foundry && var.foundry_private_dns_zone_ids == null
-  lookup_cognitive_zones = var.enable_managed_network && var.create_cognitive_account && var.cognitive_private_dns_zone_ids == null
+  lookup_cognitive_zones = var.enable_managed_network && (var.create_cognitive_account || var.create_content_safety_account) && var.cognitive_private_dns_zone_ids == null
   lookup_ml_zones        = var.enable_managed_network && var.create_ml_workspace && var.ml_private_dns_zone_ids == null
 }
 
