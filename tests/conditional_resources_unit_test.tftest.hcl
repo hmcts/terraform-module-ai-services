@@ -123,10 +123,10 @@ run "test_cognitive_account_network_acls_and_files_storage" {
 
   variables {
     create_cognitive_account                      = true
-    cognitive_account_kind                         = "OpenAI"
-    cognitive_account_network_acls_default_action  = "Deny"
-    cognitive_account_local_auth_enabled           = false
-    files_storage_account_id                       = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/files-rg/providers/Microsoft.Storage/storageAccounts/filessa"
+    cognitive_account_kind                        = "OpenAI"
+    cognitive_account_network_acls_default_action = "Deny"
+    cognitive_account_local_auth_enabled          = false
+    files_storage_account_id                      = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/files-rg/providers/Microsoft.Storage/storageAccounts/filessa"
   }
 
   assert {
@@ -192,11 +192,11 @@ run "test_ml_workspace_and_compute_instances_created" {
   }
 
   variables {
-    create_ml_workspace              = true
-    application_insights_id          = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Insights/components/example-ai"
-    instances                        = 2
+    create_ml_workspace                = true
+    application_insights_id            = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Insights/components/example-ai"
+    instances                          = 2
     compute_instance_public_ip_enabled = false
-    subnet_id                        = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/example-vnet/subnets/example-subnet"
+    subnet_id                          = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/example-vnet/subnets/example-subnet"
   }
 
   assert {

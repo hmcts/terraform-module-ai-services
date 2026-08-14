@@ -85,12 +85,12 @@ run "test_private_endpoints_created_when_managed_network_enabled" {
   }
 
   variables {
-    enable_managed_network         = true
-    create_cognitive_account       = true
-    cognitive_account_kind         = "OpenAI"
-    create_content_safety_account  = true
-    create_ml_workspace            = true
-    application_insights_id        = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Insights/components/example-ai"
+    enable_managed_network        = true
+    create_cognitive_account      = true
+    cognitive_account_kind        = "OpenAI"
+    create_content_safety_account = true
+    create_ml_workspace           = true
+    application_insights_id       = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Insights/components/example-ai"
   }
 
   assert {
@@ -147,9 +147,9 @@ run "test_central_dns_zones_looked_up_by_default" {
   }
 
   variables {
-    enable_managed_network    = true
-    create_cognitive_account  = true
-    cognitive_account_kind    = "OpenAI"
+    enable_managed_network   = true
+    create_cognitive_account = true
+    cognitive_account_kind   = "OpenAI"
   }
 
   assert {
@@ -177,7 +177,7 @@ run "test_explicit_dns_zone_ids_skip_lookup" {
   }
 
   variables {
-    enable_managed_network      = true
+    enable_managed_network       = true
     foundry_private_dns_zone_ids = ["/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/core-infra-intsvc-rg/providers/Microsoft.Network/privateDnsZones/custom.zone"]
   }
 
@@ -201,7 +201,7 @@ run "test_empty_dns_zone_ids_omit_zone_group" {
   }
 
   variables {
-    enable_managed_network      = true
+    enable_managed_network       = true
     foundry_private_dns_zone_ids = []
   }
 
