@@ -50,7 +50,7 @@ resource "azurerm_role_assignment" "ml_contributor_from_to_ai_storage_account" {
 # ml workspace access to file storage account
 
 resource "azurerm_role_assignment" "ml_blob_contributor_to_file_storage_account" {
-  count = var.files_storage_account_id == null ? 0 : 1
+  count = var.create_ml_workspace && var.files_storage_account_id != null ? 1 : 0
 
   scope                = var.files_storage_account_id
   role_definition_name = "Storage Blob Data Contributor"
@@ -58,7 +58,7 @@ resource "azurerm_role_assignment" "ml_blob_contributor_to_file_storage_account"
 }
 
 resource "azurerm_role_assignment" "ml_contributor_to_file_storage_account" {
-  count = var.files_storage_account_id == null ? 0 : 1
+  count = var.create_ml_workspace && var.files_storage_account_id != null ? 1 : 0
 
   scope                = var.files_storage_account_id
   role_definition_name = "Contributor"
@@ -86,7 +86,7 @@ resource "azurerm_role_assignment" "compute_contributor_to_ai_storage_account" {
 
 # compute cluster access to file storage account
 resource "azurerm_role_assignment" "compute_blob_contributor_to_file_storage_account" {
-  for_each = tomap({
+  for_each = var.files_storage_account_id == null ? {} : tomap({
     for i in azurerm_machine_learning_compute_instance.compute_instance : i.name => i.identity[0].principal_id
   })
   scope                = var.files_storage_account_id
@@ -95,7 +95,7 @@ resource "azurerm_role_assignment" "compute_blob_contributor_to_file_storage_acc
 }
 
 resource "azurerm_role_assignment" "compute_contributor_to_file_storage_account" {
-  for_each = tomap({
+  for_each = var.files_storage_account_id == null ? {} : tomap({
     for i in azurerm_machine_learning_compute_instance.compute_instance : i.name => i.identity[0].principal_id
   })
   scope                = var.files_storage_account_id

@@ -11,11 +11,13 @@ output "ml_workspace_identity" {
 }
 
 output "cognitive_account_primary_access_key" {
-  value = [for account in azurerm_cognitive_account.cognitive_account : account.primary_access_key]
+  value     = [for account in azurerm_cognitive_account.cognitive_account : account.primary_access_key]
+  sensitive = true
 }
 
 output "cognitive_account_secondary_access_key" {
-  value = [for account in azurerm_cognitive_account.cognitive_account : account.secondary_access_key]
+  value     = [for account in azurerm_cognitive_account.cognitive_account : account.secondary_access_key]
+  sensitive = true
 }
 
 output "cognitive_account_endpoint" {
