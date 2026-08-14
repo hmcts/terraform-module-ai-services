@@ -44,5 +44,5 @@ jobs:
         working-directory: ./
 
       - name: Terraform test
-        run: terraform test -filter=unit_test
+        run: terraform test -filter=tests/*_unit_test.tftest.hcl
         working-directory: ./
