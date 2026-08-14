@@ -25,7 +25,7 @@ resource "azurerm_private_endpoint" "foundry_private_endpoint" {
 }
 
 resource "azurerm_private_endpoint" "cognitive_private_endpoint" {
-  count = var.enable_managed_network && var.create_cognitive_account ? 1 : 0
+  count      = var.enable_managed_network && var.create_cognitive_account ? 1 : 0
   depends_on = [azurerm_cognitive_deployment.cognitive_deployment]
 
   name                = "${var.product}-cognitive-account-pe-${var.env}"
