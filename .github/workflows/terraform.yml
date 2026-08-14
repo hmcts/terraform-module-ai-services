@@ -44,5 +44,10 @@ jobs:
         working-directory: ./
 
       - name: Terraform test
-        run: terraform test -filter=tests/*_unit_test.tftest.hcl
+        run: |
+          terraform test \
+            -filter=tests/conditional_resources_unit_test.tftest.hcl \
+            -filter=tests/defaults_unit_test.tftest.hcl \
+            -filter=tests/network_unit_test.tftest.hcl \
+            -filter=tests/outputs_unit_test.tftest.hcl
         working-directory: ./
