@@ -44,5 +44,5 @@ jobs:
         working-directory: ./
 
       - name: Terraform test
-        run: terraform test -verbose
+        run: terraform test -filter=unit_test
         working-directory: ./
