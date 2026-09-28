@@ -108,6 +108,7 @@ resource "azurerm_cognitive_deployment" "cognitive_deployment" {
   cognitive_account_id = azurerm_cognitive_account.cognitive_account[0].id
 
   version_upgrade_option = each.value.version_upgrade_option
+  rai_policy_name        = each.value.rai_policy_name
 
   model {
     format  = each.value.model_format == null ? "OpenAI" : each.value.model_format
