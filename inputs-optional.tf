@@ -217,6 +217,7 @@ variable "cognitive_deployments" {
     sku_name               = optional(string)
     sku_capacity           = optional(number)
     version_upgrade_option = optional(string)
+    rai_policy_name        = optional(string)
   }))
   default = {}
 }
