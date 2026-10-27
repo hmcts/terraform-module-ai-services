@@ -16,4 +16,7 @@ module "ai" {
   enable_managed_network        = true
   create_cognitive_account      = true
   create_content_safety_account = true
+
+  cognitive_account_outbound_network_access_restricted = true
+  cognitive_account_fqdns                              = ["examplestorage.blob.core.windows.net"]
 }
