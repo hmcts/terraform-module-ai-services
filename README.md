@@ -66,6 +66,7 @@ module "ai" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_ai_project_name_override"></a> [ai\_project\_name\_override](#input\_ai\_project\_name\_override) | value to override the project name | `string` | `null` | no |
 | <a name="input_application_insights_id"></a> [application\_insights\_id](#input\_application\_insights\_id) | ID of existing application insights | `string` | `null` | no |
+| <a name="input_cognitive_account_fqdns"></a> [cognitive\_account\_fqdns](#input\_cognitive\_account\_fqdns) | FQDNs the cognitive account may reach when cognitive\_account\_outbound\_network\_access\_restricted is true (its allowedFqdnList), e.g. a storage account's blob host for Speech batch transcription. null leaves the argument unset. | `list(string)` | `null` | no |
 | <a name="input_cognitive_account_kind"></a> [cognitive\_account\_kind](#input\_cognitive\_account\_kind) | Kind of cognitive account | `string` | `null` | no |
 | <a name="input_cognitive_account_local_auth_enabled"></a> [cognitive\_account\_local\_auth\_enabled](#input\_cognitive\_account\_local\_auth\_enabled) | Whether API-key (local) authentication is enabled on the cognitive account. Set false to force Entra ID auth only. | `bool` | `true` | no |
 | <a name="input_cognitive_account_network_acls_default_action"></a> [cognitive\_account\_network\_acls\_default\_action](#input\_cognitive\_account\_network\_acls\_default\_action) | Default action for the cognitive account network ACLs (e.g. Deny). null omits the network\_acls block entirely. | `string` | `null` | no |

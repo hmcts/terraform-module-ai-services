@@ -197,6 +197,12 @@ variable "cognitive_account_outbound_network_access_restricted" {
   default     = false
 }
 
+variable "cognitive_account_fqdns" {
+  description = "FQDNs the cognitive account may reach when cognitive_account_outbound_network_access_restricted is true (its allowedFqdnList), e.g. a storage account's blob host for Speech batch transcription. null leaves the argument unset."
+  type        = list(string)
+  default     = null
+}
+
 variable "create_ml_workspace" {
   description = "Create machine learning workspace resource"
   type        = bool

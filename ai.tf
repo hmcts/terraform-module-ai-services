@@ -55,6 +55,7 @@ resource "azurerm_cognitive_account" "cognitive_account" {
   local_auth_enabled            = var.cognitive_account_local_auth_enabled
 
   outbound_network_access_restricted = var.cognitive_account_outbound_network_access_restricted
+  fqdns                              = var.cognitive_account_fqdns
 
   sku_name = var.cognitive_account_sku
 
