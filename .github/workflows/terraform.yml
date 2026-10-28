@@ -3,7 +3,7 @@ name: "Terraform"
 on:
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   terraform:
@@ -38,3 +38,16 @@ jobs:
 
       - name: Terraform format
         run: terraform fmt -check -recursive
+
+      - name: Terraform Init (module)
+        run: terraform init
+        working-directory: ./
+
+      - name: Terraform test
+        run: |
+          terraform test \
+            -filter=tests/conditional_resources_unit_test.tftest.hcl \
+            -filter=tests/defaults_unit_test.tftest.hcl \
+            -filter=tests/network_unit_test.tftest.hcl \
+            -filter=tests/outputs_unit_test.tftest.hcl
+        working-directory: ./
