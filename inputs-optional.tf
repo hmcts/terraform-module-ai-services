@@ -203,6 +203,12 @@ variable "cognitive_account_fqdns" {
   default     = null
 }
 
+variable "cognitive_account_storage_account_id" {
+  description = "Storage account bound to the cognitive account (bring your own storage), e.g. where Speech batch transcription writes its results. Azure only accepts it when the account is created and it cannot be changed later. The account's system-assigned identity is given Storage Blob Data Contributor on it. null leaves the account without its own storage."
+  type        = string
+  default     = null
+}
+
 variable "create_ml_workspace" {
   description = "Create machine learning workspace resource"
   type        = bool
