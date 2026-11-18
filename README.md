@@ -38,13 +38,11 @@ module "ai" {
 | [azurerm_machine_learning_compute_instance.compute_instance](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/machine_learning_compute_instance) | resource |
 | [azurerm_machine_learning_workspace.ml_workspace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/machine_learning_workspace) | resource |
 | [azurerm_private_endpoint.cognitive_private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
-| [azurerm_private_endpoint.cognitive_storage_private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.content_safety_private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.foundry_private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.ml_private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
 | [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_role_assignment.cog_blob_contributor_to_ai_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.cog_blob_contributor_to_cognitive_account_storage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.cog_blob_contributor_to_file_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.cog_contributor_to_ai_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.cog_contributor_to_file_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
@@ -56,10 +54,8 @@ module "ai" {
 | [azurerm_role_assignment.ml_blob_contributor_to_file_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.ml_contributor_from_to_ai_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.ml_contributor_to_file_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
-| [azurerm_storage_account.cognitive_account_storage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_storage_account.workspace_storage_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_private_dns_zone.api_azureml](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/private_dns_zone) | data source |
-| [azurerm_private_dns_zone.blob](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/private_dns_zone) | data source |
 | [azurerm_private_dns_zone.cognitiveservices](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/private_dns_zone) | data source |
 | [azurerm_private_dns_zone.notebooks](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/private_dns_zone) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
@@ -76,17 +72,15 @@ module "ai" {
 | <a name="input_cognitive_account_network_acls_default_action"></a> [cognitive\_account\_network\_acls\_default\_action](#input\_cognitive\_account\_network\_acls\_default\_action) | Default action for the cognitive account network ACLs (e.g. Deny). null omits the network\_acls block entirely. | `string` | `null` | no |
 | <a name="input_cognitive_account_outbound_network_access_restricted"></a> [cognitive\_account\_outbound\_network\_access\_restricted](#input\_cognitive\_account\_outbound\_network\_access\_restricted) | Whether the cognitive account's own outbound network access is restricted. Defaults to false (provider default). | `bool` | `false` | no |
 | <a name="input_cognitive_account_sku"></a> [cognitive\_account\_sku](#input\_cognitive\_account\_sku) | SKU of cognitive account | `string` | `"F0"` | no |
-| <a name="input_cognitive_account_storage_name_override"></a> [cognitive\_account\_storage\_name\_override](#input\_cognitive\_account\_storage\_name\_override) | Name of the storage account created by create\_cognitive\_account\_storage. Defaults to <product><component>byos<env> without hyphens. | `string` | `null` | no |
+| <a name="input_cognitive_account_storage_account_id"></a> [cognitive\_account\_storage\_account\_id](#input\_cognitive\_account\_storage\_account\_id) | Storage account bound to the cognitive account (bring your own storage), e.g. where Speech batch transcription writes its results. Azure only accepts it when the account is created. The caller creates the storage, allows the account through its network rules and gives the account's system-assigned identity Storage Blob Data Contributor on it. null leaves the account without its own storage. | `string` | `null` | no |
 | <a name="input_cognitive_deployments"></a> [cognitive\_deployments](#input\_cognitive\_deployments) | Map of cognitive deployments keyed by deployment name. | <pre>map(object({<br/>    model_name             = optional(string)<br/>    model_version          = optional(string)<br/>    model_format           = optional(string)<br/>    sku_name               = optional(string)<br/>    sku_capacity           = optional(number)<br/>    version_upgrade_option = optional(string)<br/>  }))</pre> | `{}` | no |
 | <a name="input_cognitive_private_dns_zone_ids"></a> [cognitive\_private\_dns\_zone\_ids](#input\_cognitive\_private\_dns\_zone\_ids) | Private DNS zone IDs for the cognitive account private endpoint. null resolves the central zones via the azurerm.private\_dns provider; empty list omits the dns zone group. | `list(string)` | `null` | no |
-| <a name="input_cognitive_storage_private_dns_zone_ids"></a> [cognitive\_storage\_private\_dns\_zone\_ids](#input\_cognitive\_storage\_private\_dns\_zone\_ids) | Private DNS zone IDs for the cognitive account storage private endpoint. null resolves the central zone via the azurerm.private\_dns provider; empty list omits the dns zone group. | `list(string)` | `null` | no |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | Common tag to be applied to resources | `map(string)` | n/a | yes |
 | <a name="input_component"></a> [component](#input\_component) | https://hmcts.github.io/glossary/#component | `string` | n/a | yes |
 | <a name="input_compute_instance_public_ip_enabled"></a> [compute\_instance\_public\_ip\_enabled](#input\_compute\_instance\_public\_ip\_enabled) | Enable public IP for compute instances | `bool` | `false` | no |
 | <a name="input_content_safety_account_sku"></a> [content\_safety\_account\_sku](#input\_content\_safety\_account\_sku) | SKU of content safety account | `string` | `"F0"` | no |
 | <a name="input_create_ai_foundry"></a> [create\_ai\_foundry](#input\_create\_ai\_foundry) | Create the AI Foundry hub and project resources | `bool` | `true` | no |
 | <a name="input_create_cognitive_account"></a> [create\_cognitive\_account](#input\_create\_cognitive\_account) | Create cognitive account resource | `bool` | `false` | no |
-| <a name="input_create_cognitive_account_storage"></a> [create\_cognitive\_account\_storage](#input\_create\_cognitive\_account\_storage) | Create a storage account bound to the cognitive account (bring your own storage), e.g. where Speech batch transcription writes its results. Azure only accepts it when the account is created. The storage denies network access except from the cognitive account, whose system-assigned identity is given Storage Blob Data Contributor on it. Its blob host is added to the account's fqdns when outbound access is restricted, and a blob private endpoint is created when enable\_managed\_network is true. | `bool` | `false` | no |
 | <a name="input_create_content_safety_account"></a> [create\_content\_safety\_account](#input\_create\_content\_safety\_account) | Create content safety account resource | `bool` | `false` | no |
 | <a name="input_create_ml_workspace"></a> [create\_ml\_workspace](#input\_create\_ml\_workspace) | Create machine learning workspace resource | `bool` | `false` | no |
 | <a name="input_create_storage_account"></a> [create\_storage\_account](#input\_create\_storage\_account) | Create the workspace storage account. Only needed by the AI Foundry hub / ML workspace; set false alongside create\_ai\_foundry = false when neither is used. | `bool` | `true` | no |
@@ -134,8 +128,6 @@ module "ai" {
 | <a name="output_cognitive_account_identity"></a> [cognitive\_account\_identity](#output\_cognitive\_account\_identity) | n/a |
 | <a name="output_cognitive_account_primary_access_key"></a> [cognitive\_account\_primary\_access\_key](#output\_cognitive\_account\_primary\_access\_key) | n/a |
 | <a name="output_cognitive_account_secondary_access_key"></a> [cognitive\_account\_secondary\_access\_key](#output\_cognitive\_account\_secondary\_access\_key) | n/a |
-| <a name="output_cognitive_account_storage_account_id"></a> [cognitive\_account\_storage\_account\_id](#output\_cognitive\_account\_storage\_account\_id) | n/a |
-| <a name="output_cognitive_account_storage_account_name"></a> [cognitive\_account\_storage\_account\_name](#output\_cognitive\_account\_storage\_account\_name) | n/a |
 | <a name="output_cognitive_private_endpoint_ip"></a> [cognitive\_private\_endpoint\_ip](#output\_cognitive\_private\_endpoint\_ip) | n/a |
 | <a name="output_compute_instance_identity"></a> [compute\_instance\_identity](#output\_compute\_instance\_identity) | n/a |
 | <a name="output_content_safety_account_endpoint"></a> [content\_safety\_account\_endpoint](#output\_content\_safety\_account\_endpoint) | n/a |
