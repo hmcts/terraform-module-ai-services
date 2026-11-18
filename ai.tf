@@ -66,6 +66,13 @@ resource "azurerm_cognitive_account" "cognitive_account" {
     }
   }
 
+  dynamic "storage" {
+    for_each = var.cognitive_account_storage_account_id == null ? [] : [1]
+    content {
+      storage_account_id = var.cognitive_account_storage_account_id
+    }
+  }
+
   identity {
     type = "SystemAssigned"
   }
