@@ -108,29 +108,3 @@ resource "azurerm_private_endpoint" "ml_private_endpoint" {
   tags = var.common_tags
 
 }
-
-resource "azurerm_private_endpoint" "cognitive_storage_private_endpoint" {
-  count = var.enable_managed_network && local.create_cognitive_account_storage ? 1 : 0
-
-  name                = "${local.cognitive_account_storage_name}-blob-pe"
-  location            = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].location : var.location
-  resource_group_name = var.existing_resource_group_name == null ? azurerm_resource_group.rg[0].name : var.existing_resource_group_name
-  subnet_id           = var.subnet_id
-
-  private_service_connection {
-    name                           = "cognitive-storage-psc"
-    private_connection_resource_id = azurerm_storage_account.cognitive_account_storage[0].id
-    subresource_names              = ["blob"]
-    is_manual_connection           = false
-  }
-
-  dynamic "private_dns_zone_group" {
-    for_each = length(local.cognitive_storage_private_dns_zone_ids) == 0 ? [] : [1]
-    content {
-      name                 = "endpoint-dnszonegroup"
-      private_dns_zone_ids = local.cognitive_storage_private_dns_zone_ids
-    }
-  }
-
-  tags = var.common_tags
-}

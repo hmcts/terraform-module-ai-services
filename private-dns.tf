@@ -30,15 +30,3 @@ locals {
   cognitive_private_dns_zone_ids = local.lookup_cognitive_zones ? [data.azurerm_private_dns_zone.cognitiveservices[0].id] : coalesce(var.cognitive_private_dns_zone_ids, [])
   ml_private_dns_zone_ids        = local.lookup_ml_zones ? [data.azurerm_private_dns_zone.api_azureml[0].id, data.azurerm_private_dns_zone.notebooks[0].id] : coalesce(var.ml_private_dns_zone_ids, [])
 }
-
-locals {
-  lookup_cognitive_storage_zones         = var.enable_managed_network && local.create_cognitive_account_storage && var.cognitive_storage_private_dns_zone_ids == null
-  cognitive_storage_private_dns_zone_ids = local.lookup_cognitive_storage_zones ? [data.azurerm_private_dns_zone.blob[0].id] : coalesce(var.cognitive_storage_private_dns_zone_ids, [])
-}
-
-data "azurerm_private_dns_zone" "blob" {
-  provider            = azurerm.private_dns
-  count               = local.lookup_cognitive_storage_zones ? 1 : 0
-  name                = "privatelink.blob.core.windows.net"
-  resource_group_name = var.private_dns_zone_resource_group_name
-}

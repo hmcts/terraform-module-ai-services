@@ -203,14 +203,8 @@ variable "cognitive_account_fqdns" {
   default     = null
 }
 
-variable "create_cognitive_account_storage" {
-  description = "Create a storage account bound to the cognitive account (bring your own storage), e.g. where Speech batch transcription writes its results. Azure only accepts it when the account is created. The storage denies network access except from the cognitive account, whose system-assigned identity is given Storage Blob Data Contributor on it. Its blob host is added to the account's fqdns when outbound access is restricted, and a blob private endpoint is created when enable_managed_network is true."
-  type        = bool
-  default     = false
-}
-
-variable "cognitive_account_storage_name_override" {
-  description = "Name of the storage account created by create_cognitive_account_storage. Defaults to <product><component>byos<env> without hyphens."
+variable "cognitive_account_storage_account_id" {
+  description = "Storage account bound to the cognitive account (bring your own storage), e.g. where Speech batch transcription writes its results. Azure only accepts it when the account is created. The caller creates the storage, allows the account through its network rules and gives the account's system-assigned identity Storage Blob Data Contributor on it. null leaves the account without its own storage."
   type        = string
   default     = null
 }
@@ -247,12 +241,6 @@ variable "foundry_private_dns_zone_ids" {
 
 variable "cognitive_private_dns_zone_ids" {
   description = "Private DNS zone IDs for the cognitive account private endpoint. null resolves the central zones via the azurerm.private_dns provider; empty list omits the dns zone group."
-  type        = list(string)
-  default     = null
-}
-
-variable "cognitive_storage_private_dns_zone_ids" {
-  description = "Private DNS zone IDs for the cognitive account storage private endpoint. null resolves the central zone via the azurerm.private_dns provider; empty list omits the dns zone group."
   type        = list(string)
   default     = null
 }
