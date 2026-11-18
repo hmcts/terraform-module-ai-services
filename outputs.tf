@@ -57,3 +57,11 @@ output "compute_instance_identity" {
 output "ai_storage_account_id" {
   value = length(azurerm_storage_account.workspace_storage_account) == 0 ? var.existing_storage_account_id : azurerm_storage_account.workspace_storage_account[0].id
 }
+
+output "cognitive_account_storage_account_id" {
+  value = one(azurerm_storage_account.cognitive_account_storage[*].id)
+}
+
+output "cognitive_account_storage_account_name" {
+  value = one(azurerm_storage_account.cognitive_account_storage[*].name)
+}

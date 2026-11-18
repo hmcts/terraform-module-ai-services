@@ -55,7 +55,7 @@ resource "azurerm_cognitive_account" "cognitive_account" {
   local_auth_enabled            = var.cognitive_account_local_auth_enabled
 
   outbound_network_access_restricted = var.cognitive_account_outbound_network_access_restricted
-  fqdns                              = var.cognitive_account_fqdns
+  fqdns                              = local.cognitive_account_fqdns
 
   sku_name = var.cognitive_account_sku
 
@@ -67,9 +67,9 @@ resource "azurerm_cognitive_account" "cognitive_account" {
   }
 
   dynamic "storage" {
-    for_each = var.cognitive_account_storage_account_id == null ? [] : [1]
+    for_each = local.create_cognitive_account_storage ? [1] : []
     content {
-      storage_account_id = var.cognitive_account_storage_account_id
+      storage_account_id = azurerm_storage_account.cognitive_account_storage[0].id
     }
   }
 

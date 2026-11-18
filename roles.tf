@@ -15,10 +15,9 @@ resource "azurerm_role_assignment" "cog_contributor_to_ai_storage_account" {
   principal_id         = azurerm_cognitive_account.cognitive_account[0].identity[0].principal_id
 }
 
-# Skipped when it is also the ai storage account, which already has this role above.
-resource "azurerm_role_assignment" "cog_blob_contributor_to_own_storage_account" {
-  count                = var.create_cognitive_account && var.cognitive_account_storage_account_id != null && var.cognitive_account_storage_account_id != var.existing_storage_account_id ? 1 : 0
-  scope                = var.cognitive_account_storage_account_id
+resource "azurerm_role_assignment" "cog_blob_contributor_to_cognitive_account_storage" {
+  count                = local.create_cognitive_account_storage ? 1 : 0
+  scope                = azurerm_storage_account.cognitive_account_storage[0].id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = azurerm_cognitive_account.cognitive_account[0].identity[0].principal_id
 }
